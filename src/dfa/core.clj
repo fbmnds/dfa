@@ -16,9 +16,9 @@
 (defn do-state-cycle [dfa x]
   (if (empty? x)
     nil
-    (let [[word state] x
-          new-states (map #(do-transform-state [word state] %)
-                          (state (:transitions dfa)))]
+    (let [[payload-0 state-0] x
+          new-states (map #(do-transform-state [payload-0 state-0] %)
+                          (state-0 (:transitions dfa)))]
       [(map first (filter #((second %) (:accepts dfa)) new-states))
        new-states])))
 
