@@ -5,7 +5,7 @@
 (deftest dfa-test
   (testing "FIXME, I fail."
     (is (= #{"a" "ab" "abc"}
-           (set (f '{:states #{q0 q1 q2 q3}
+           (set (dfa-seq '{:states #{q0 q1 q2 q3}
                      :alphabet #{a b c}
                      :start q0
                      :accepts #{q1 q2 q3}
@@ -14,7 +14,7 @@
                                    q2 {c q3}}}))))
 
     (is (= #{"hi" "hey" "hello"}
-           (set (f '{:states #{q0 q1 q2 q3 q4 q5 q6 q7}
+           (set (dfa-seq '{:states #{q0 q1 q2 q3 q4 q5 q6 q7}
                      :alphabet #{e h i l o y}
                      :start q0
                      :accepts #{q2 q4 q7}
@@ -25,7 +25,7 @@
                                    q6 {o q7}}}))))
 
     (is (= (set (let [ss "vwxyz"] (for [i ss, j ss, k ss, l ss] (str i j k l))))
-           (set (f '{:states #{q0 q1 q2 q3 q4}
+           (set (dfa-seq '{:states #{q0 q1 q2 q3 q4}
                      :alphabet #{v w x y z}
                      :start q0
                      :accepts #{q4}
@@ -35,7 +35,7 @@
                                    q3 {v q4, w q4, x q4, y q4, z q4}}}))))
 
 
-    (is (let [res (take 2000 (f '{:states #{q0 q1}
+    (is (let [res (take 2000 (dfa-seq '{:states #{q0 q1}
                                   :alphabet #{0 1}
                                   :start q0
                                   :accepts #{q0}
@@ -44,7 +44,7 @@
           (and (every? (partial re-matches #"0*(?:10*10*)*") res)
                (= res (distinct res)))))
 
-    (is (let [res (take 2000 (f '{:states #{q0 q1}
+    (is (let [res (take 2000 (dfa-seq '{:states #{q0 q1}
                                   :alphabet #{n m}
                                   :start q0
                                   :accepts #{q1}
@@ -52,7 +52,7 @@
           (and (every? (partial re-matches #"n*m") res)
                (= res (distinct res)))))
 
-    (is (let [res (take 2000 (f '{:states #{q0 q1 q2 q3 q4 q5 q6 q7 q8 q9}
+    (is (let [res (take 2000 (dfa-seq '{:states #{q0 q1 q2 q3 q4 q5 q6 q7 q8 q9}
                                   :alphabet #{i l o m p t}
                                   :start q0
                                   :accepts #{q5 q8}

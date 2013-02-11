@@ -1,7 +1,7 @@
 (ns dfa.core)
 
 
-(defn f [dfa]
+(defn dfa-seq [dfa]
   (let [join
         (fn [word letter]
           (clojure.string/join (concat word (str letter))))
