@@ -63,8 +63,8 @@
                                                 q9 {o q6}}})
 
 
-(deftest dfa-test
-  (testing "FIXME, final test."
+(deftest dfa-test-1
+  (testing "final test - finite DFA"
     (is (= #{"a" "ab" "abc"}
            (set (dfa-seq dfa-1))))
 
@@ -72,9 +72,11 @@
            (set (dfa-seq dfa-2))))
 
     (is (= (set (let [ss "vwxyz"] (for [i ss, j ss, k ss, l ss] (str i j k l))))
-           (set (dfa-seq dfa-3))))
+           (set (dfa-seq dfa-3))))))
 
 
+(deftest dfa-test-2
+  (testing "final test - infinite DFA"
     (is (let [res (take 2000 (dfa-seq dfa-4))]
           (and (every? (partial re-matches #"0*(?:10*10*)*") res)
                (= res (distinct res)))))
